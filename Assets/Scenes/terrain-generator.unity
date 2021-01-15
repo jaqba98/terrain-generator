@@ -526,6 +526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1465586339}
   lastPosition: {x: 0, y: 0, z: 0}
+  playerController: {fileID: 869429924}
 --- !u!1 &1040806047
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,12 +13,11 @@ public class ChunkController : MonoBehaviour
 
 	void Update()
 	{
-		if(Vector3.Distance(transform.position, chunkModel.playerModel.player.position) > 1200f)
+		if (!chunkModel.playerModel.playerController.IsNotMoving()) return;
+		
+		if (Vector3.Distance(transform.position, chunkModel.playerModel.player.position) > 400f)
 		{
-			chunkModel.terrain.SetActive(false);
-			return;
+			Destroy(gameObject);
 		}
-
-		chunkModel.terrain.SetActive(true);
 	}
 }
