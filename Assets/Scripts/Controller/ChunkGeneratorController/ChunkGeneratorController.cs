@@ -2,61 +2,56 @@
 
 public class ChunkGeneratorController : MonoBehaviour
 {
-    [SerializeField] ChunkGeneratorModel chunkGeneratorModel;
+	[SerializeField] ChunkGeneratorModel chunkGeneratorModel;
 
-    public void GenerateChunk()
-    {
-        Vector3Int chunkPosition = GetChunkPosition();
+	public void GenerateChunk()
+	{
+		Vector3Int chunkPosition = GetChunkPosition();
 
-        foreach (Vector3Int position in GetPositionsToGenerate(chunkPosition))
-        {
-            string name = position.ToString();
+		foreach (Vector3Int position in GetPositionsToGenerate(chunkPosition))
+		{
+			string name = position.ToString();
+			if (GameObject.Find(name)) continue;
+			CreateChunk(position, name);
+		}
+	}
 
-            if (GameObject.Find(name))
-            {
-                continue;
-            }
+	Vector3Int GetChunkPosition()
+	{
+		return Vector3Int.FloorToInt(chunkGeneratorModel.playerModel.player.position) /
+      chunkGeneratorModel.size *
+      chunkGeneratorModel.size;
+	}
 
-            CreateChunk(position, name);
-        }
-    }
+	Vector3Int[] GetPositionsToGenerate(Vector3Int position)
+	{
+		int size = chunkGeneratorModel.size;
 
-    Vector3Int GetChunkPosition()
-    {
-        return Vector3Int.FloorToInt(chunkGeneratorModel.playerModel.player.position) /
-            chunkGeneratorModel.size *
-            chunkGeneratorModel.size;
-    }
+		return new Vector3Int[]
+  	{
+      position,
+      position + (Vector3Int.forward * size) + (Vector3Int.left * size),
+      position + (Vector3Int.forward * size),
+      position + (Vector3Int.forward * size) + (Vector3Int.right * size),
+      position + (Vector3Int.left * size),
+      position + (Vector3Int.right * size),
+      position + (Vector3Int.back * size) + (Vector3Int.left * size),
+      position + (Vector3Int.back * size),
+      position + (Vector3Int.back * size) + (Vector3Int.right * size)
+    };
+  }
 
-    Vector3Int[] GetPositionsToGenerate(Vector3Int position)
-    {
-        int size = chunkGeneratorModel.size;
+  void CreateChunk(Vector3Int position, string name)
+  {
+    GameObject chunk = new GameObject(name);
+    chunk.transform.position = position;
+    chunk.transform.parent = chunkGeneratorModel.parentOfChunks;
+    CreateTerrain(position, chunk);
+  }
 
-        return new Vector3Int[]
-        {
-            position,
-            position + (Vector3Int.forward * size) + (Vector3Int.left * size),
-            position + (Vector3Int.forward * size),
-            position + (Vector3Int.forward * size) + (Vector3Int.right * size),
-            position + (Vector3Int.left * size),
-            position + (Vector3Int.right * size),
-            position + (Vector3Int.back * size) + (Vector3Int.left * size),
-            position + (Vector3Int.back * size),
-            position + (Vector3Int.back * size) + (Vector3Int.right * size)
-        };
-    }
-
-    void CreateChunk(Vector3Int position, string name)
-    {
-        GameObject chunk = new GameObject(name);
-        chunk.transform.position = position;
-        chunk.transform.parent = chunkGeneratorModel.parentOfChunks;
-        CreateTerrain(position, chunk);
-    }
-
-    void CreateTerrain(Vector3Int position, GameObject chunk)
-    {
-        GameObject terrain = Instantiate(chunkGeneratorModel.chunk, position, Quaternion.identity);
-        terrain.transform.parent = chunk.transform;
-    }
+	void CreateTerrain(Vector3Int position, GameObject chunk)
+	{
+		GameObject terrain = Instantiate(chunkGeneratorModel.chunk, position, Quaternion.identity);
+		terrain.transform.parent = chunk.transform;
+	}
 }
