@@ -46,7 +46,9 @@ public class ChunkGeneratorController : MonoBehaviour
     GameObject chunk = new GameObject(name);
     chunk.transform.position = position;
     chunk.transform.parent = chunkGeneratorModel.parentOfChunks;
-    CreateTerrain(position, chunk);
+		chunk.AddComponent<ChunkController>();
+		chunk.AddComponent<ChunkModel>();
+		CreateTerrain(position, chunk);
   }
 
 	void CreateTerrain(Vector3Int position, GameObject chunk)
