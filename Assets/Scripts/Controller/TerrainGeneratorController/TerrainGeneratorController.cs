@@ -6,11 +6,9 @@ public class TerrainGeneratorController : MonoBehaviour
 
 	void Start() => GenerateTerrain();
 
-	void Update() => GenerateTerrain(true);
-
-	void GenerateTerrain(bool checkPlayerIsMoving = false)
+	public void GenerateTerrain(bool checkPlayerIsMoving = false)
 	{
-		if (CheckWhetherGenerate(checkPlayerIsMoving)) return;
+		// if (CheckWhetherGenerate(checkPlayerIsMoving)) return;
 
 		terrainGeneratorModel.chunkGeneratorController.GenerateChunk();
 	}

@@ -7,7 +7,6 @@ public class ChunkGeneratorController : MonoBehaviour
 	public void GenerateChunk()
 	{
 		Vector3Int chunkPosition = GetChunkPosition();
-
 		foreach (Vector3Int position in GetPositionsToGenerate(chunkPosition))
 		{
 			string name = position.ToString();
