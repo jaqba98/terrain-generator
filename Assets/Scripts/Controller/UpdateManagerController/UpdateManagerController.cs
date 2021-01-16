@@ -4,19 +4,17 @@ public class UpdateManagerController : MonoBehaviour
 {
 	[SerializeField] UpdateManagerModel updateManagerModel;
 
-	void Start()
-	{
-		UpdateManagerModel.updateManagerControllerInstance = this;
-	}
+	void Start() => UpdateManagerModel.updateManagerControllerInstance = this;
 
 	void Update()
 	{
-		updateManagerModel.terrainGeneratorController.GenerateTerrain(true);
+		UpdateTerrainGeneratorController();
+		UpdateChunkController();
+	}
 
-		foreach(ChunkController chunkController in updateManagerModel.chunkControllers)
-		{
-			chunkController.ManagedUpdate();
-		}
+	void UpdateTerrainGeneratorController()
+	{
+		updateManagerModel.terrainGeneratorController.GenerateTerrain(true);
 	}
 
 	public void RegisterChunkController(ChunkController chunkController)
@@ -28,4 +26,7 @@ public class UpdateManagerController : MonoBehaviour
 	{
 		updateManagerModel.chunkControllers.Remove(chunkController);
 	}
+
+	void UpdateChunkController() =>
+		updateManagerModel.chunkControllers.ForEach(chunk => chunk.ManagedUpdate());
 }

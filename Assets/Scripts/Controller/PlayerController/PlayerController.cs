@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour
 
 	public bool IsNotMoving()
 	{
-		if (playerModel.player.position == playerModel.lastPosition) return true;
-		playerModel.lastPosition = playerModel.player.position;
+		if (playerModel.playerView.position == playerModel.lastPosition) return true;
+		playerModel.lastPosition = playerModel.playerView.position;
 		return false;
 	}
 }

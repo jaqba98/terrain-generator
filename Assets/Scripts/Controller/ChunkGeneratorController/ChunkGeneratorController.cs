@@ -7,17 +7,20 @@ public class ChunkGeneratorController : MonoBehaviour
 	public void GenerateChunk()
 	{
 		Vector3Int chunkPosition = GetChunkPosition();
+
 		foreach (Vector3Int position in GetPositionsToGenerate(chunkPosition))
 		{
 			string name = position.ToString();
+
 			if (GameObject.Find(name)) continue;
+			
 			CreateChunk(position, name);
 		}
 	}
 
 	Vector3Int GetChunkPosition()
 	{
-		return Vector3Int.FloorToInt(chunkGeneratorModel.playerModel.player.position) /
+		return Vector3Int.FloorToInt(chunkGeneratorModel.playerModel.playerView.position) /
       chunkGeneratorModel.size *
       chunkGeneratorModel.size;
 	}
@@ -44,7 +47,7 @@ public class ChunkGeneratorController : MonoBehaviour
   {
     GameObject chunk = new GameObject(name);
     chunk.transform.position = position;
-    chunk.transform.parent = chunkGeneratorModel.parentOfChunks;
+    chunk.transform.parent = chunkGeneratorModel.chunksView;
 		chunk.AddComponent<ChunkController>();
 		chunk.AddComponent<ChunkModel>();
 		CreateTerrain(position, chunk);
