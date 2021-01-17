@@ -2,7 +2,8 @@
 
 public class PlayerModel : MonoBehaviour
 {
-	public Vector3 lastPosition;
-
 	public Transform playerView;
+
+	[HideInInspector]
+	public Vector3 lastPosition;
 }
