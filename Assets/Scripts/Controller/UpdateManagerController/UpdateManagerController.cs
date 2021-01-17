@@ -2,31 +2,14 @@ using UnityEngine;
 
 public class UpdateManagerController : MonoBehaviour
 {
-	[SerializeField] UpdateManagerModel updateManagerModel;
+	[SerializeField]
+	private UpdateManagerModel updateManagerModel;
 
-	void Start() => UpdateManagerModel.updateManagerControllerInstance = this;
+	private void Update() => UpdateManager();
 
-	void Update()
-	{
-		UpdateTerrainGeneratorController();
-		UpdateChunkController();
-	}
-
-	void UpdateTerrainGeneratorController()
+	private void UpdateManager()
 	{
 		updateManagerModel.terrainGeneratorController.GenerateTerrain(true);
-	}
-
-	public void RegisterChunkController(ChunkController chunkController)
-	{
-		updateManagerModel.chunkControllers.Add(chunkController);
-	}
-
-	public void UnregisterChunkController(ChunkController chunkController)
-	{
-		updateManagerModel.chunkControllers.Remove(chunkController);
-	}
-
-	void UpdateChunkController() =>
 		updateManagerModel.chunkControllers.ForEach(chunk => chunk.ManagedUpdate());
+	}
 }

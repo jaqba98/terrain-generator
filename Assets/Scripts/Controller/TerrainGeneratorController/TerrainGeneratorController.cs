@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class TerrainGeneratorController : MonoBehaviour
 {
-	[SerializeField] TerrainGeneratorModel terrainGeneratorModel;
-
-	void Start() => GenerateTerrain();
+	public TerrainGeneratorModel terrainGeneratorModel;
 
 	public void GenerateTerrain(bool checkPlayerIsMoving = false)
 	{
-		if (CheckWhetherGenerate(checkPlayerIsMoving)) return;
+		if (CheckWhetherGenerate(checkPlayerIsMoving))
+		{
+			return;
+		}
+
 		terrainGeneratorModel.chunkGeneratorController.GenerateChunk();
 	}
 
-	bool CheckWhetherGenerate(bool checkPlayerIsMoving) =>
-		terrainGeneratorModel.playerController.IsNotMoving() && checkPlayerIsMoving;
+	bool CheckWhetherGenerate(bool checkPlayerIsMoving)
+	{
+		return terrainGeneratorModel.playerController.IsNotMoving() && checkPlayerIsMoving;
+	}
 }

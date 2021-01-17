@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StartManagerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField]
+	private StartManagerModel startManagerModel;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void Start() => StartManager();
+
+	private void StartManager()
+	{
+		startManagerModel.terrainGeneratorController.GenerateTerrain();
+	}
 }

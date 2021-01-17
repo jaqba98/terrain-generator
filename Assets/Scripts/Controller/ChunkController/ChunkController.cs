@@ -10,7 +10,7 @@ public class ChunkController : MonoBehaviour
 		chunkModel.playerModel = GameObject.Find("Player/Model").GetComponent<PlayerModel>();
 		chunkModel.terrain = transform.GetChild(0).gameObject;
 		chunkModel.terrainMeshRenderer = chunkModel.terrain.GetComponent<MeshRenderer>();
-		UpdateManagerModel.updateManagerControllerInstance.RegisterChunkController(this);
+		GameObject.Find("UpdateManager/Model").GetComponent<UpdateManagerModel>().chunkControllers.Add(this);
 	}
 
 	public void ManagedUpdate()
