@@ -9,4 +9,6 @@ public class UpdateManagerModel : MonoBehaviour
 	public List<ChunkController> chunkControllers = new List<ChunkController>();
 
 	public PlayerController playerController;
+
+	public CameraController cameraController;
 }

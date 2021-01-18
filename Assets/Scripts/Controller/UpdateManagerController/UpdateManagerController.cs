@@ -14,4 +14,9 @@ public class UpdateManagerController : MonoBehaviour
 		updateManagerModel.terrainGeneratorController.GenerateTerrain(true);
 		updateManagerModel.chunkControllers.ForEach(chunk => chunk.ManagedUpdate());
 	}
+
+	private void LateUpdate()
+	{
+		updateManagerModel.cameraController.Follow();
+	}
 }

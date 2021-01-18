@@ -22,14 +22,16 @@ public class PlayerController : MonoBehaviour
 
 	public void Rotation()
 	{
-        Plane playerPlane = new Plane(Vector3.up, transform.position);
+        Plane playerPlane = new Plane(Vector3.up, playerModel.playerView.transform.position);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (playerPlane.Raycast(ray, out float hitDist))
         {
             Vector3 target = ray.GetPoint(hitDist);
 
-            Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+            if (Vector3.Distance(target, playerModel.playerView.transform.position) < 2f) return;
+
+            Quaternion targetRotation = Quaternion.LookRotation(target - playerModel.playerView.transform.position);
 
             playerModel.playerView.transform.rotation =
                 Quaternion.Slerp(playerModel.playerView.transform.rotation, targetRotation, playerModel.mouseLookSpeed);
