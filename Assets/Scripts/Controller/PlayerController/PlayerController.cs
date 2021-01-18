@@ -7,17 +7,34 @@ public class PlayerController : MonoBehaviour
 
 	public void Move()
 	{
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        playerModel.vertical = Input.GetAxis("Vertical");
 
-        playerModel.characterController.Move(move * Time.deltaTime * 10f);
+        if (playerModel.vertical == 0f) return;
 
-        if (move != Vector3.zero)
+        Vector3 move = playerModel.vertical > 0 ?
+            playerModel.playerView.TransformDirection(Vector3.forward) :
+            playerModel.playerView.TransformDirection(Vector3.back);
+
+        move *= playerModel.moveSpeed * Time.deltaTime;
+
+        playerModel.characterController.Move(move);
+    }
+
+	public void Rotation()
+	{
+        Plane playerPlane = new Plane(Vector3.up, transform.position);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (playerPlane.Raycast(ray, out float hitDist))
         {
-            gameObject.transform.forward = move;
-        }
+            Vector3 target = ray.GetPoint(hitDist);
 
-        playerModel.characterController.Move(playerModel.playerVelocity * Time.deltaTime);
-    }	
+            Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+
+            playerModel.playerView.transform.rotation =
+                Quaternion.Slerp(playerModel.playerView.transform.rotation, targetRotation, playerModel.mouseLookSpeed);
+        }
+    }
 
 	public bool IsNotMoving()
 	{

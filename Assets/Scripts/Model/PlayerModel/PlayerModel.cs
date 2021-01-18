@@ -10,5 +10,9 @@ public class PlayerModel : MonoBehaviour
 	public CharacterController characterController;
 
 	[HideInInspector]
-	public Vector3 playerVelocity;
+	public float vertical;
+
+	public float moveSpeed;
+
+	public float mouseLookSpeed;
 }
