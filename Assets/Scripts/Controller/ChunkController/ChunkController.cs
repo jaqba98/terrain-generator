@@ -2,29 +2,23 @@ using UnityEngine;
 
 public class ChunkController : MonoBehaviour
 {
+	[HideInInspector]
 	public ChunkModel chunkModel;
 
 	public void ManagedUpdate()
 	{
-		try
+		float distance = GetDistanceBetweenChunkAndPlayer();
+
+		if (distance > chunkModel.chunkGeneratorModel.size * 1.5f)
 		{
-			float distance = GetDistanceBetweenChunkAndPlayer();
-
-			if (distance > 250f)
-			{
-				chunkModel.terrain.SetActive(false);
-			}
-
-			else
-			{
-				chunkModel.terrain.SetActive(true);
-			}
+			chunkModel.terrain.SetActive(false);
+			return;
 		}
 
-		catch { }
+		chunkModel.terrain.SetActive(true);
 	}
 
-	float GetDistanceBetweenChunkAndPlayer()
+	private float GetDistanceBetweenChunkAndPlayer()
 	{
 		float x1 = transform.position.x;
 		float z1 = transform.position.z;
@@ -34,8 +28,5 @@ public class ChunkController : MonoBehaviour
 		return Mathf.Sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
 	}
 
-	public string GetNameOfObject()
-	{
-		return chunkModel.nameOfObject;
-	}
+	public string GetNameOfObject() => chunkModel.nameOfObject;
 }

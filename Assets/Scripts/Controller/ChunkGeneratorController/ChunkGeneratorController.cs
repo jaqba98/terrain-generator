@@ -80,6 +80,7 @@ public class ChunkGeneratorController : MonoBehaviour
 		chunkModel.nameOfObject = name;
 		chunkModel.playerModel = chunkGeneratorModel.playerModel;
 		chunkModel.terrain = terrain;
+		chunkModel.chunkGeneratorModel = chunkGeneratorModel;
 
 		ChunkController chunkController = controller.AddComponent<ChunkController>();
 
