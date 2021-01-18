@@ -2,16 +2,7 @@ using UnityEngine;
 
 public class ChunkController : MonoBehaviour
 {
-	[SerializeField] ChunkModel chunkModel;
-
-	void Start()
-	{
-		chunkModel = GetComponent<ChunkModel>();
-		chunkModel.playerModel = GameObject.Find("Player/Model").GetComponent<PlayerModel>();
-		chunkModel.terrain = transform.GetChild(0).gameObject;
-		chunkModel.terrainMeshRenderer = chunkModel.terrain.GetComponent<MeshRenderer>();
-		GameObject.Find("UpdateManager/Model").GetComponent<UpdateManagerModel>().chunkControllers.Add(this);
-	}
+	public ChunkModel chunkModel;
 
 	public void ManagedUpdate()
 	{
@@ -41,5 +32,10 @@ public class ChunkController : MonoBehaviour
 		float z2 = chunkModel.playerModel.playerView.transform.position.z;
 
 		return Mathf.Sqrt(((x2 - x1) * (x2 - x1)) + ((z2 - z1) * (z2 - z1)));
+	}
+
+	public string GetNameOfObject()
+	{
+		return chunkModel.nameOfObject;
 	}
 }
