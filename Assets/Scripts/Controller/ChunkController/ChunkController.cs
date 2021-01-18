@@ -9,7 +9,7 @@ public class ChunkController : MonoBehaviour
 	{
 		float distance = GetDistanceBetweenChunkAndPlayer();
 
-		if (distance > chunkModel.chunkGeneratorModel.size * 1.5f)
+		if (distance > chunkModel.chunkGeneratorModel.size * 2.5f)
 		{
 			if (chunkModel.terrain.activeSelf)
 			{

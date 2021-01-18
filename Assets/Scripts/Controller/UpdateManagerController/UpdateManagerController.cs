@@ -9,6 +9,7 @@ public class UpdateManagerController : MonoBehaviour
 
 	private void UpdateManager()
 	{
+		updateManagerModel.playerController.Move();
 		updateManagerModel.terrainGeneratorController.GenerateTerrain(true);
 		updateManagerModel.chunkControllers.ForEach(chunk => chunk.ManagedUpdate());
 	}

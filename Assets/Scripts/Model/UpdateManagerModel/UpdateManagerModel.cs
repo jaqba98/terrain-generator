@@ -7,4 +7,6 @@ public class UpdateManagerModel : MonoBehaviour
 
 	[HideInInspector]
 	public List<ChunkController> chunkControllers = new List<ChunkController>();
+
+	public PlayerController playerController;
 }
