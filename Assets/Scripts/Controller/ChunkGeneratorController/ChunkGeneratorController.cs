@@ -10,9 +10,8 @@ public class ChunkGeneratorController : MonoBehaviour
 	{
 		Vector3Int chunkPosition = GetChunkPosition();
 
-		List<Vector3Int> positionsToGenerate = GetPositionsToGenerate(chunkPosition);
-
-		positionsToGenerate.ForEach(position => CheckWhetherGenerate(position));
+		GetPositionsToGenerate(chunkPosition)
+			.ForEach(position => CheckWhetherGenerate(position));
 	}
 
 	private Vector3Int GetChunkPosition()
@@ -28,11 +27,11 @@ public class ChunkGeneratorController : MonoBehaviour
 
 		return new List<Vector3Int>
 		{
-			position,
 			position + (Vector3Int.forward * size) + (Vector3Int.left * size),
 			position + (Vector3Int.forward * size),
 			position + (Vector3Int.forward * size) + (Vector3Int.right * size),
 			position + (Vector3Int.left * size),
+			position,
 			position + (Vector3Int.right * size),
 			position + (Vector3Int.back * size) + (Vector3Int.left * size),
 			position + (Vector3Int.back * size),
@@ -48,10 +47,7 @@ public class ChunkGeneratorController : MonoBehaviour
 			.chunkControllers
 			.Find(chunk => chunk.GetNameOfObject() == name);
 
-		if (finded)
-		{
-			return;
-		}
+		if (finded) return;
 
 		CreateChunk(position, name);
 	}
@@ -59,15 +55,16 @@ public class ChunkGeneratorController : MonoBehaviour
 	private void CreateChunk(Vector3Int position, string name)
 	{
 		GameObject chunk = new GameObject(name);
-
 		SetPositionAndParent(chunkGeneratorModel.chunksView, position, chunk.transform);
 
 		GameObject model = new GameObject("Model");
-		GameObject view = new GameObject("View");
-		GameObject controller = new GameObject("Controller");
-
 		SetPositionAndParent(chunk.transform, position, model.transform);
+
+
+		GameObject view = new GameObject("View");
 		SetPositionAndParent(chunk.transform, position, view.transform);
+
+		GameObject controller = new GameObject("Controller");
 		SetPositionAndParent(chunk.transform, position, controller.transform);
 
 		GameObject terrain = Instantiate(chunkGeneratorModel.terrain, position, Quaternion.identity);

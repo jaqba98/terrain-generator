@@ -11,18 +11,12 @@ public class ChunkController : MonoBehaviour
 
 		if (distance > chunkModel.chunkGeneratorModel.size * 2.5f)
 		{
-			if (chunkModel.terrain.activeSelf)
-			{
-				chunkModel.terrain.SetActive(false);
-			}
+			if (chunkModel.terrain.activeSelf) chunkModel.terrain.SetActive(false);
 
 			return;
 		}
 
-		if (!chunkModel.terrain.activeSelf)
-		{
-			chunkModel.terrain.SetActive(true);
-		}
+		if (!chunkModel.terrain.activeSelf)	chunkModel.terrain.SetActive(true);
 	}
 
 	private float GetDistanceBetweenChunkAndPlayer()

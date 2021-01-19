@@ -9,9 +9,6 @@ public class PlayerModel : MonoBehaviour
 
 	public CharacterController characterController;
 
-	[HideInInspector]
-	public float vertical;
-
 	public float moveSpeed;
 
 	public float mouseLookSpeed;

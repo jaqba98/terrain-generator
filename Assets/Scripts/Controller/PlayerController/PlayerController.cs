@@ -5,15 +5,22 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private PlayerModel playerModel;
 
-	public void Move()
+    public bool IsNotMoving()
+    {
+        if (playerModel.playerView.position == playerModel.lastPosition) return true;
+
+        playerModel.lastPosition = playerModel.playerView.position;
+
+        return false;
+    }
+
+    public void Move()
 	{
-        playerModel.vertical = Input.GetAxis("Vertical");
+        float vertical = Input.GetAxis("Vertical");
 
-        if (playerModel.vertical == 0f) return;
+        if (vertical <= 0f) return;
 
-        Vector3 move = playerModel.vertical > 0 ?
-            playerModel.playerView.TransformDirection(Vector3.forward) :
-            playerModel.playerView.TransformDirection(Vector3.back);
+        Vector3 move = playerModel.playerView.TransformDirection(Vector3.forward);
 
         move *= playerModel.moveSpeed * Time.deltaTime;
 
@@ -37,13 +44,4 @@ public class PlayerController : MonoBehaviour
                 Quaternion.Slerp(playerModel.playerView.transform.rotation, targetRotation, playerModel.mouseLookSpeed);
         }
     }
-
-	public bool IsNotMoving()
-	{
-		if (playerModel.playerView.position == playerModel.lastPosition) return true;
-
-		playerModel.lastPosition = playerModel.playerView.position;
-
-		return false;
-	}
 }

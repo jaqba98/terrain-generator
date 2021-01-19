@@ -11,7 +11,9 @@ public class UpdateManagerController : MonoBehaviour
 	{
 		updateManagerModel.playerController.Move();
 		updateManagerModel.playerController.Rotation();
+
 		updateManagerModel.terrainGeneratorController.GenerateTerrain(true);
+
 		updateManagerModel.chunkControllers.ForEach(chunk => chunk.ManagedUpdate());
 	}
 
