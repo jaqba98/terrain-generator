@@ -11,4 +11,8 @@ public class ChunkGeneratorModel : MonoBehaviour
 	public Transform chunksView;
 
 	public GameObject terrain;
+
+	public int width;
+
+	public int height;
 }
