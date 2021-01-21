@@ -67,9 +67,8 @@ public class ChunkGeneratorController : MonoBehaviour
 		GameObject controller = new GameObject("Controller");
 		SetPositionAndParent(chunk.transform, position, controller.transform);
 
-		GameObject terrain = Instantiate(chunkGeneratorModel.terrain, position, Quaternion.identity);
+		GameObject terrain = new GameObject("TerrainView");
 
-		terrain.transform.name = "TerrainView";
 		terrain.transform.parent = view.transform;
 
 		ChunkModel chunkModel = model.AddComponent<ChunkModel>();

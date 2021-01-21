@@ -15,4 +15,6 @@ public class ChunkGeneratorModel : MonoBehaviour
 	public int width;
 
 	public int height;
+
+	public PerlinNoiseController perlinNoiseController;
 }

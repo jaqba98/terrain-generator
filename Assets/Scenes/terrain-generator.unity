@@ -985,6 +985,7 @@ MonoBehaviour:
   terrain: {fileID: 2554672166770997905, guid: c0000f1d02781ba4dbe8db75dfefd664, type: 3}
   width: 20
   height: 20
+  perlinNoiseController: {fileID: 1967302698}
 --- !u!1 &1300775877
 GameObject:
   m_ObjectHideFlags: 0
