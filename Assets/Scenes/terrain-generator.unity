@@ -986,6 +986,7 @@ MonoBehaviour:
   width: 20
   height: 20
   perlinNoiseController: {fileID: 1967302698}
+  material: {fileID: 2100000, guid: 944251c1da4c0b2449484caad747e643, type: 2}
 --- !u!1 &1300775877
 GameObject:
   m_ObjectHideFlags: 0

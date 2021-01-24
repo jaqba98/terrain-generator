@@ -17,4 +17,6 @@ public class ChunkGeneratorModel : MonoBehaviour
 	public int height;
 
 	public PerlinNoiseController perlinNoiseController;
+
+	public Material material;
 }
